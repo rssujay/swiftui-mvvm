@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct MVVMTodoListApp: App {
+    @StateObject var textTodoListManager: TextTodoListManager = TextTodoListManager([])
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TextTodoListView(textTodoListManager: textTodoListManager)
         }
     }
 }
