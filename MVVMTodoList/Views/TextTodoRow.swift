@@ -8,39 +8,37 @@
 import SwiftUI
 
 struct TextTodoRow: View {
-    @ObservedObject var textTodoItemManager: TextTodoItemManager
+    @ObservedObject var manager: TextTodoItemManager
     
     var body: some View {
         func createTodoView(_ color: Color) -> some View {
-            return VStack {
-                Text(textTodoItemManager.todoItem.title)
-                    .font(.title)
-                    .foregroundColor(color)
+            return HStack {
+                VStack {
+                    Text(manager.title)
+                        .font(.title)
+                        .foregroundColor(color)
 
-                Spacer()
-                
-                Text(textTodoItemManager.todoItem.contents)
-            }
-        }
-        
-        if textTodoItemManager.todoItem.isComplete {
-            return HStack {
-                createTodoView(Color.green)
-                Spacer()
-            }
-        } else {
-            return HStack {
-                createTodoView(Color.orange)
+                    Spacer()
+
+                    Text(manager.contents)
+                }
+
                 Spacer()
             }
         }
 
+        let color = manager.isComplete ? Color.green : Color.orange
+
+        return createTodoView(color)
+            .onTapGesture{
+                manager.markAsComplete()
+            }
     }
 }
 
 struct TextTodoRow_Previews: PreviewProvider {
     static var previews: some View {
-        TextTodoRow(textTodoItemManager: TextTodoItemManager(
+        TextTodoRow(manager: TextTodoItemManager(
             TextTodo(title: "test title", contents: "test contents")
         ))
     }

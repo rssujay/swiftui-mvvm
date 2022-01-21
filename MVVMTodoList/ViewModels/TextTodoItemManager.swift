@@ -13,4 +13,20 @@ class TextTodoItemManager: ObservableObject {
     init(_ textTodoItem: TextTodo) {
         self.todoItem = textTodoItem
     }
+
+    var title: String {
+        todoItem.title
+    }
+
+    var contents: String {
+        todoItem.contents
+    }
+
+    var isComplete: Bool {
+        todoItem.isComplete
+    }
+
+    func markAsComplete() {
+        todoItem.markAsComplete()
+    }
 }

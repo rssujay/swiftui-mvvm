@@ -13,7 +13,7 @@ struct TextTodoListView: View {
     var body: some View {
         List(textTodoListManager.todoList) { todo in
             TextTodoRow(
-                textTodoItemManager: TextTodoItemManager(todo)
+                manager: TextTodoItemManager(todo)
             )
         }
     }
